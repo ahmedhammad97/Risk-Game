@@ -1,0 +1,82 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: black;
+  background-image: url("images/bg2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+h1{
+  color: midnightblue;
+  font-size: 50px;
+  margin-top: 40px;
+  text-shadow: 1px 1px 5px black;
+}
+#maps{
+  margin-top: 60px;
+  width: 60%;
+  background-color: rgba(0,0,0,0.6);
+  border-radius: 5px;
+}
+#maps img{
+  width: 40%;
+  margin: 20px;
+  border: 5px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+#maps img:hover{
+  opacity: 0.85;
+}
+#maps img.selected{
+  border-color: yellow;
+  opacity: 1;
+  cursor: default;
+}
+form{
+  margin-top: 60px;
+}
+select{
+  margin: 20px;
+  width: 350px;
+  height: 40px;
+  background-color: lightgrey;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+#playerOne{
+  background-color: dodgerblue;
+}
+#playerTwo{
+  background-color: red;
+}
+button{
+  width: 200px;
+  height: 40px;
+  background-color: lawngreen;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.8;
+  font-weight: bold;
+}
+button:hover{
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+footer{
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 22px;
+}

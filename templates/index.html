@@ -2,9 +2,55 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Risk Game</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "index.css" %}">
   </head>
   <body>
-    <h1>Test!</h1>
+
+    <center>
+      <h1>Risk Game</h1>
+
+      <div id="maps">
+        {% load static %}
+        <img src="{% static "images/eygpt.jpg" %}" alt="Egypt map" class="selected">
+        <img src="{% static "images/us.jpg" %}" alt="US map" class="">
+      </div>
+
+      <form action="/play" method="post">
+        <select id="playerOne">
+            <option value="" disabled selected>Choose Agent One</option>
+            <option value="human">Human</option>
+            <option value="cPassive">Completely Passive</option>
+            <option value="aggresive">Aggresive</option>
+            <option value="nPacifist">Nearly Pacifist</option>
+            <option value="greedy">Greedy</option>
+            <option value="aStar">A Star</option>
+            <option value="rAStar">Real-Time A Star</option>
+            <option value="minmax">Minmax</option>
+          </select>
+
+          <select id="playerTwo">
+            <option value="" disabled selected>Choose Agent Two</option>
+            <option value="human">Human</option>
+            <option value="cPassive">Completely Passive</option>
+            <option value="aggresive">Aggresive</option>
+            <option value="nPacifist">Nearly Pacifist</option>
+            <option value="greedy">Greedy</option>
+            <option value="aStar">A Star</option>
+            <option value="rAStar">Real-Time A Star</option>
+            <option value="minmax">Minmax</option>
+          </select>
+          <br /><br /><br /><br /><br />
+          <button type="submit" name="submit">Start Game!</button>
+      </form>
+
+      <footer>
+        <p>Made with love by : Salma, Amr, Hammad</p>
+      </footer>
+    </center>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "index.js" %}"></script>
   </body>
 </html>
