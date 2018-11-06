@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Risk Game</title>
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Kaushan+Script|Orbitron" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static "index.css" %}">
   </head>
@@ -18,7 +19,8 @@
       </div>
 
       <form action="/play" method="post">
-        <select id="playerOne">
+        <input type="checkbox" name="map" value="true" id="isEgypt">
+        <select id="playerOne" name="playerOne">
             <option value="" disabled selected>Choose Agent One</option>
             <option value="human">Human</option>
             <option value="cPassive">Completely Passive</option>
@@ -30,7 +32,7 @@
             <option value="minmax">Minmax</option>
           </select>
 
-          <select id="playerTwo">
+          <select id="playerTwo" name="playerTwo">
             <option value="" disabled selected>Choose Agent Two</option>
             <option value="human">Human</option>
             <option value="cPassive">Completely Passive</option>
@@ -46,7 +48,7 @@
       </form>
 
       <footer>
-        <p>Made with love by : Salma, Amr, Hammad</p>
+        <p>Made with love by : &nbsp&nbsp Salma,&nbsp Amr,&nbsp Hammad</p>
       </footer>
     </center>
 

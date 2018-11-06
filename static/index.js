@@ -1,5 +1,6 @@
 //Default Map
 var egypt = true;
+$("#isEgypt").prop("checked", true);
 
 //Toggle Maps
 $("#maps img").on("click", event=>{
@@ -8,16 +9,14 @@ $("#maps img").on("click", event=>{
     $("#maps img").removeClass("selected");
     $(el).addClass("selected");
     egypt = !egypt;
+    $("#isEgypt").prop("checked", egypt);
   }
 })
 
 $("button").on("click", event=>{
-  event.preventDefault();
-  if(validateInput()){
-    //Here we go...
-  }
-  else{
-    alert("Plase check your input again!");
+  if(!validateInput()){
+    event.preventDefault();
+    alert("You need to choose both agents");
   }
 })
 

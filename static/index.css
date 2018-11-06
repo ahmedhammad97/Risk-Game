@@ -10,9 +10,10 @@ body{
 }
 h1{
   color: midnightblue;
-  font-size: 50px;
+  font-size: 40px;
   margin-top: 40px;
   text-shadow: 1px 1px 5px black;
+  font-family: 'Orbitron', sans-serif;
 }
 #maps{
   margin-top: 60px;
@@ -43,19 +44,21 @@ select{
   margin: 20px;
   width: 350px;
   height: 40px;
-  background-color: lightgrey;
   border: 2px solid black;
   border-radius: 5px;
   font-size: 20px;
   text-align: center;
   cursor: pointer;
-  font-weight: bold;
+  font-family: 'Fredoka One', cursive;
 }
 #playerOne{
   background-color: dodgerblue;
 }
 #playerTwo{
   background-color: red;
+}
+#isEgypt{
+  visibility: hidden;
 }
 button{
   width: 200px;
@@ -67,6 +70,7 @@ button{
   cursor: pointer;
   opacity: 0.8;
   font-weight: bold;
+  font-family: 'Fredoka One', cursive;
 }
 button:hover{
   opacity: 1;
@@ -79,4 +83,5 @@ footer{
   bottom: 0;
   width: 100%;
   font-size: 22px;
+  font-family: 'Kaushan Script', cursive;
 }
