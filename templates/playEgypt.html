@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Playing Game...</title>
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Kaushan+Script|Orbitron" rel="stylesheet">
+    <style>
+      #game{
+        {% load static %}
+        background-image: url("{% static "images/egyptMap.jpg" %}");
+      }
+    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "play.css" %}">
+  </head>
+  <body>
+    <center>
+
+    <header>
+      <p id="msg">Game has started</p>
+    </header>
+
+    <div id="game">
+
+    </div>
+
+    </center>
+    <script type="text/javascript" src="{% static "play.js" %}"></script>
+  </body>
+</html>

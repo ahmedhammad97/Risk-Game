@@ -14,12 +14,15 @@
 
       <div id="maps">
         {% load static %}
-        <img src="{% static "images/eygpt.jpg" %}" alt="Egypt map" class="selected">
+        <img src="{% static "images/egypt.jpg" %}" alt="Egypt map" class="selected">
         <img src="{% static "images/us.jpg" %}" alt="US map" class="">
       </div>
 
-      <form action="/play" method="post">
-        <input type="checkbox" name="map" value="true" id="isEgypt">
+      <form action="play" method="post">
+        <div id="isEgypt">
+          <input type="radio" name="map" value="egypt" id="eg">
+          <input type="radio" name="map" value="us" id="us">
+        </div>
         <select id="playerOne" name="playerOne">
             <option value="" disabled selected>Choose Agent One</option>
             <option value="human">Human</option>
@@ -48,7 +51,7 @@
       </form>
 
       <footer>
-        <p>Made with love by : &nbsp&nbsp Salma,&nbsp Amr,&nbsp Hammad</p>
+        <p>Made with love ❤ by : &nbsp&nbsp Salma,&nbsp Amr,&nbsp Hammad</p>
       </footer>
     </center>
 

@@ -1,6 +1,6 @@
 //Default Map
 var egypt = true;
-$("#isEgypt").prop("checked", true);
+$("#eg").prop("checked", true);
 
 //Toggle Maps
 $("#maps img").on("click", event=>{
@@ -9,7 +9,15 @@ $("#maps img").on("click", event=>{
     $("#maps img").removeClass("selected");
     $(el).addClass("selected");
     egypt = !egypt;
-    $("#isEgypt").prop("checked", egypt);
+
+    if(egypt){
+      $("#eg").prop("checked", true);
+      $("#us").prop("checked", false);
+    }
+    else{
+      $("#eg").prop("checked", false);
+      $("#us").prop("checked", true);
+    }
   }
 })
 
