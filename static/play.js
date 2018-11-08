@@ -7,9 +7,10 @@ socket.onopen = function(e){
 
 socket.onmessage = function(e) {
     var data = e.data;
-    //var message = data['message'];
-    console.log(data);
-    //TBC
+    if(data.type=="initialization") initialize(JSON.parse(data));
+    if(data.type=="deplyInputRequest") getDeployInput(JSON.parse(data));
+    if(data.type=="attackInputRequest") getAttackInput(JSON.parse(data));
+    if(data.type=="render") render(JSON.parse(data));
 };
 
 socket.onclose = function(e) {
@@ -21,3 +22,8 @@ socket.onerror = function(e) {
 };
 
 //socket.send("message"); Use Json
+
+//Helper functions
+function initialize(data){
+
+}

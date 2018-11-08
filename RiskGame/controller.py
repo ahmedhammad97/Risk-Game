@@ -1,6 +1,8 @@
-from .model import *
+from .model import Game
 
-def prepareGame(request):
-    #Create Model
-    #Return random distribution
-    return
+class controller:
+    def __init__(self, data):
+        #Create Model
+        self.game = Game(data.map, data.playerOne, data.playerTwo)
+
+    
