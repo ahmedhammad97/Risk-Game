@@ -1,5 +1,6 @@
 from .model import *
 
 def prepareGame(request):
-    #Call model
+    #Create Model
+    #Return random distribution
     return

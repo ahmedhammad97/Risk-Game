@@ -6,8 +6,9 @@ socket.onopen = function(e){
 };
 
 socket.onmessage = function(e) {
-    var data = JSON.parse(e.data);
-    var message = data['message'];
+    var data = e.data;
+    //var message = data['message'];
+    console.log(data);
     //TBC
 };
 
@@ -18,3 +19,5 @@ socket.onclose = function(e) {
 socket.onerror = function(e) {
     alert("Something gone wrong, we apologize :(");
 };
+
+//socket.send("message"); Use Json

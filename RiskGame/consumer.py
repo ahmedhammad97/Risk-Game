@@ -1,9 +1,11 @@
 from channels.generic.websocket import WebsocketConsumer
 import json
+from . import controller
 
 class GameConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
+        self.send("Test message sent from Server")
 
     def disconnect(self, close_code):
         pass
