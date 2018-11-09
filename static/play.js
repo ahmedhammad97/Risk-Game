@@ -6,11 +6,11 @@ socket.onopen = function(e){
 };
 
 socket.onmessage = function(e) {
-    var data = e.data;
-    if(data.type=="initialization") initialize(JSON.parse(data));
-    if(data.type=="deplyInputRequest") getDeployInput(JSON.parse(data));
-    if(data.type=="attackInputRequest") getAttackInput(JSON.parse(data));
-    if(data.type=="render") render(JSON.parse(data));
+    var data = JSON.parse(e.data);
+    console.log(data);
+    if(data.type=="deplyInputRequest") getDeployInput(data);
+    if(data.type=="attackInputRequest") getAttackInput(data);
+    if(data.type=="render") render(data);
 };
 
 socket.onclose = function(e) {
@@ -24,6 +24,12 @@ socket.onerror = function(e) {
 //socket.send("message"); Use Json
 
 //Helper functions
-function initialize(data){
-
+function render(data){
+  nodes = data.armies;
+  for(i=0; i<nodes.length; i++){
+    $("#"+i).css("background-color", ()=>{
+      return nodes[i]["color"]=="Blue"? "dodgerblue" : "red";
+    })
+    $("#"+i).val(nodes[i]["armies"])
+  }
 }

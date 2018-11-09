@@ -1,5 +1,5 @@
 import random
-from . import Data
+from . import Data, Node
 
 class Game:
     def __init__(self, country, agentOne, agentTwo):
@@ -13,15 +13,15 @@ class Game:
     def constructGraph(self):
         for i in range(len(self.MapData)):
             owner = "Blue" if random.getrandbits(1)==1 else "Red"
-            node = Node(i, owner)
+            node = Node.Node(i, owner)
             self.cities.append(node)
 
     def populateNeighbours(self):
         for city in self.cities:
-            for neighbour in self.MapData[i]:
+            for neighbour in self.MapData[city.id]:
                 city.neighbours.append(self.cities[neighbour])
 
-    def getIds(self):
+    def toRender(self):
         result = []
         for city in self.cities:
-            result.append(city.id)
+            result.append({ "color":city.owner, "armies":city.armies })

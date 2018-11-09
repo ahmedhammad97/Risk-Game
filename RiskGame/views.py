@@ -7,18 +7,22 @@ def index(request):
 
 def play(request):
     try:
-        map, playerOne, playerTwo, data
-        if(request.POST['map']=="egypt"):
-            data["map"] = "Egypt"
-            return render(request, 'playEgypt.html')
-        elif(request.POST['map']=="us"):
-            data["map"] = "Usa"
-            return render(request, 'playUS.html')
-
+        data = {}
         data["playerOne"] = request.POST['playerOne']
         data["playerTwo"] = request.POST['playerTwo']
 
-        controller(data) #Create Game class and playing agents
+        if(request.POST['map']=="egypt"):
+            data["map"] = "Egypt"
+        elif(request.POST['map']=="us"):
+            data["map"] = "Usa"
 
-    except:
+        controller.prepare(data) #Create Game class and playing agents
+
+        if(request.POST['map']=="egypt"):
+            return render(request, 'playEgypt.html')
+        elif(request.POST['map']=="us"):
+            return render(request, 'playUS.html')
+
+    except Exception as e:
+        print(e)
         return render(request, 'error.html')

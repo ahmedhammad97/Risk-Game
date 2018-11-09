@@ -5,10 +5,8 @@ from . import controller
 class GameConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
-        self.send(json.dumps({
-            type: "initialization",
-            armies: controller.game.getIds()
-        }))
+        self.send(controller.initialize())
+        print("Send successfully")
 
     def disconnect(self, close_code):
         pass

@@ -1,8 +1,15 @@
 from .model import Game
+import json
 
-class controller:
-    def __init__(self, data):
-        #Create Model
-        self.game = Game(data.map, data.playerOne, data.playerTwo)
+game = None
 
-    
+def prepare(data):
+    global game
+    game = Game.Game(data["map"], data["playerOne"], data["playerTwo"])
+
+def initialize():
+    global game
+    return json.dumps({
+        "type": "initialization",
+        "nodes": game.toRender()
+    })
