@@ -25,11 +25,11 @@ socket.onerror = function(e) {
 
 //Helper functions
 function render(data){
-  nodes = data.armies;
+  nodes = data.nodes;
   for(i=0; i<nodes.length; i++){
     $("#"+i).css("background-color", ()=>{
       return nodes[i]["color"]=="Blue"? "dodgerblue" : "red";
     })
-    $("#"+i).val(nodes[i]["armies"])
+    $("#"+i).text(nodes[i]["armies"])
   }
 }

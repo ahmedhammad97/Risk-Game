@@ -9,7 +9,11 @@ def prepare(data):
 
 def initialize():
     global game
-    return json.dumps({
-        "type": "initialization",
-        "nodes": game.toRender()
-    })
+    items = game.toRender()
+    result =  {
+        "type": "render",
+        "nodes": []
+    }
+    for item in items:
+        result["nodes"].append(item)
+    return json.dumps(result)

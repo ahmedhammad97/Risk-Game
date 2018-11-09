@@ -8,6 +8,7 @@ class Game:
         self.MapData = Data.EgyptCities if country=="Egypt" else Data.UsaCities
         self.cities = []
         self.constructGraph()
+        self.placeArmies()
         self.populateNeighbours()
 
     def constructGraph(self):
@@ -16,12 +17,15 @@ class Game:
             node = Node.Node(i, owner)
             self.cities.append(node)
 
+    def placeArmies(self):
+        for city in self.cities:
+            city.armies = random.randint(1, 5)
+
     def populateNeighbours(self):
         for city in self.cities:
             for neighbour in self.MapData[city.id]:
                 city.neighbours.append(self.cities[neighbour])
 
     def toRender(self):
-        result = []
         for city in self.cities:
-            result.append({ "color":city.owner, "armies":city.armies })
+            yield { "color":city.owner, "armies":city.armies }

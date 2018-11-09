@@ -6,7 +6,6 @@ class GameConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
         self.send(controller.initialize())
-        print("Send successfully")
 
     def disconnect(self, close_code):
         pass
