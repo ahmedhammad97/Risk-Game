@@ -5,12 +5,14 @@ from . import controller
 class GameConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
+        print("Wohooo .. Connected to client!")
         self.send(controller.initialize())
 
     def disconnect(self, close_code):
-        pass
+        print("WebSocket connection is lost...")
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        controller.handleRecieved(text_data)
+        #controller.handleRecieved(text_data)
+        print(text_data_json["message"])
         #self.send(text_data=json.dumps({}))

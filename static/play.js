@@ -7,8 +7,7 @@ socket.onopen = function(e){
 
 socket.onmessage = function(e) {
     var data = JSON.parse(e.data);
-    console.log(data);
-    if(data.type=="deplyInputRequest") getDeployInput(data);
+    if(data.type=="deployInputRequest") getDeployInput(data);
     if(data.type=="attackInputRequest") getAttackInput(data);
     if(data.type=="render") render(data);
 };
@@ -32,4 +31,5 @@ function render(data){
     })
     $("#"+i).text(nodes[i]["armies"])
   }
+  socket.send(JSON.stringify({"message": "started"}))
 }

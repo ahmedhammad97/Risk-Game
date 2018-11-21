@@ -10,10 +10,10 @@ def prepare(data):
 def initialize():
     global game
     items = game.toRender()
-    result =  {
-        "type": "render",
-        "nodes": []
-    }
+    result =  {"type": "render", "nodes": []}
     for item in items:
         result["nodes"].append(item)
     return json.dumps(result)
+
+def handleRecieved(message):
+    pass

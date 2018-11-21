@@ -1,5 +1,4 @@
 
-
 class Node:
     def __init__(self, id, owner, armies=0):
         self.id = id
