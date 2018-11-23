@@ -3,12 +3,12 @@ from . import Data, Node, AgentFactory
 
 class Game:
     def __init__(self, country, agentOne, agentTwo):
-        #Players TBC
         self.country = country
         self.Blue = AgentFactory.build(agentOne, "Blue")
         self.Red = AgentFactory.build(agentTwo, "Red")
         self.MapData = Data.EgyptCities if country=="Egypt" else Data.UsaCities
         self.cities = []
+        self.Blueturn = True
         self.constructGraph()
         self.placeArmies()
         self.populateNeighbours()
@@ -28,6 +28,14 @@ class Game:
             for neighbour in self.MapData[city.id]:
                 city.neighbours.append(self.cities[neighbour])
 
-    def toRender(self):
+    def getMap(self):
         for city in self.cities:
             yield { "color":city.owner, "armies":city.armies }
+
+    def calculateBonus(self):
+        turn = "Blue" if self.Blueturn else "Red"
+        counter = 0
+        for city in self.cities:
+            if city.owner == turn:
+                counter+=1
+        return max(3, counter/3)
