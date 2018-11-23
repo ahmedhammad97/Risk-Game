@@ -5,8 +5,8 @@ class Game:
     def __init__(self, country, agentOne, agentTwo):
         #Players TBC
         self.country = country
-        self.Blue = AgentFactory.build(agentOne)
-        self.Red = AgentFactory.build(agentTwo)
+        self.Blue = AgentFactory.build(agentOne, "Blue")
+        self.Red = AgentFactory.build(agentTwo, "Red")
         self.MapData = Data.EgyptCities if country=="Egypt" else Data.UsaCities
         self.cities = []
         self.constructGraph()

@@ -1,5 +1,6 @@
 //WebSocket
-var socket = new WebSocket('ws://' + window.location.host + window.location.pathname);
+var socket = new WebSocket('ws://' + window.location.host +
+                                     window.location.pathname);
 
 socket.onopen = function(e){
     console.log("Connection started .. Hell yeah!");
@@ -20,7 +21,7 @@ socket.onerror = function(e) {
     alert("Something gone wrong, we apologize :(");
 };
 
-//socket.send("message"); Use Json
+// socket.send(JSON.stringify({"message": "started"}))
 
 //Helper functions
 function render(data){
@@ -31,5 +32,4 @@ function render(data){
     })
     $("#"+i).text(nodes[i]["armies"])
   }
-  socket.send(JSON.stringify({"message": "started"}))
 }
