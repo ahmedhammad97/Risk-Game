@@ -17,10 +17,16 @@ def renderMap(type="render", message=None):
         result["nodes"].append(item)
         if(message!=None):
             result["message"] = message
+        result["color"] = "Blue" if game.Blueturn else "Red"
     return json.dumps(result)
 
-def handleRecieved(message):
-    pass
+def handleRecieved(data):
+    if data.type == "deploymentSuccess":
+        completeTurn()
+    elif data.type == "attackSuccess":
+        endturn()
+    else:
+        pass
 
 def startTurn():
     global game
@@ -51,4 +57,4 @@ def checkForWinner():
 
 def declareWinner(winner):
     message = winner + " player won the game .. Wohooo!"
-    GameConsumer.sendWinnerMessage(message)
+    GameConsumer.sendWinnerMessage(message, winner)

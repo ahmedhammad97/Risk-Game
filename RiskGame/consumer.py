@@ -14,13 +14,12 @@ class GameConsumer(WebsocketConsumer):
 
     def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        #controller.handleRecieved(text_data)
-        print(text_data_json["message"])
-        #self.send(text_data=json.dumps({}))
+        controller.handleRecieved(text_data)
 
-    def sendWinnerMessage(self, message):
+    def sendWinnerMessage(self, message, winner):
         toSend = {
             "type" : "winning",
-            "message" : message
+            "message" : message,
+            "winner" : winner
         }
         self.send(json.dumps(toSend))

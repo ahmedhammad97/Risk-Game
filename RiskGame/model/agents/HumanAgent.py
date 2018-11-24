@@ -1,10 +1,11 @@
+from .. import AgentsHelper
 
 class HumanAgent:
     def __init__(self, color):
         self.color = color
 
-    def deploy(map, armies):
+    def deploy(self, map, armies):
         pass
 
-    def attack(map):
+    def attack(self, map):
         pass

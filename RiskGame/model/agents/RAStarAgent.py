@@ -1,10 +1,11 @@
+from .. import AgentsHelper
 
 class RAStarAgent:
     def __init__(self, color):
         self.color = color
 
-    def deploy(map):
+    def deploy(self, map, armies):
         pass
 
-    def attack(map):
+    def attack(self, map):
         pass
