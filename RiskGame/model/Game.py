@@ -38,4 +38,4 @@ class Game:
         for city in self.cities:
             if city.owner == turn:
                 counter+=1
-        return max(3, counter/3)
+        return max(3, int(counter/3))

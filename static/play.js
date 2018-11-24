@@ -7,12 +7,14 @@ socket.onopen = function(e){
 
 socket.onmessage = function(e) {
     var data = JSON.parse(e.data);
-    if(data.type=="deployInputRequest") getDeployInput(data);
-    if(data.type=="attackInputRequest") getAttackInput(data);
-    if(data.type=="renderDeployments") renderDeployments(data);
-    if(data.type=="renderAttack") renderAttack(data);
-    if(data.type=="render") render(data);
-    if(data.type=="winning") displayMessage(data.message, data.winner)
+    setTimeout(()=>{
+      if(data.type=="deployInputRequest") getDeployInput(data);
+      if(data.type=="attackInputRequest") getAttackInput(data);
+      if(data.type=="renderDeployments") renderDeployments(data);
+      if(data.type=="renderAttack") renderAttack(data);
+      if(data.type=="render") render(data);
+      if(data.type=="winning") displayMessage(data.message, data.winner)
+    },2000)
 };
 
 socket.onclose = function(e) {
@@ -35,7 +37,13 @@ function render(data){
     $("#"+i).css("background-color", ()=>{
       return nodes[i]["color"]=="Blue"? "dodgerblue" : "red";
     })
+    let originalArmies = $("#"+i).text()
     $("#"+i).text(nodes[i]["armies"])
+    if(originalArmies != $("#"+i).text()){
+      let originalColor = $("#"+i).css("background-color")
+      $("#"+i).css("background-color", "yellow")
+      setTimeout(()=>{$("#"+i).css("background-color", originalColor)}, 1000)
+    }
   }
 }
 
@@ -50,3 +58,6 @@ function renderAttack(data){
   render(data);
   socket.send(JSON.stringify({"type" : "attackSuccess"}))
 }
+
+//getDeployInput TBC
+//getAttackInput TBC

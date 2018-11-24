@@ -1,15 +1,16 @@
 from .model import Game
-import json
+import json, time
 from .consumer import GameConsumer
 
 #Global Singlton Game Object
 game = None
 
+
 def prepare(data):
     global game
     game = Game.Game(data["map"], data["playerOne"], data["playerTwo"])
 
-def renderMap(type="render", message=None):
+def renderMap(type, message):
     global game
     items = game.getMap()
     result =  {"type": type, "nodes": []}
@@ -20,28 +21,20 @@ def renderMap(type="render", message=None):
         result["color"] = "Blue" if game.Blueturn else "Red"
     return json.dumps(result)
 
-def handleRecieved(data):
-    if data.type == "deploymentSuccess":
-        completeTurn()
-    elif data.type == "attackSuccess":
-        endturn()
-    else:
-        pass
-
 def startTurn():
     global game
     player = game.Blue if game.Blueturn else game.Red
-    player.deploy(game.cities, game.calculateBonus())
+    return player.deploy(game.cities, game.calculateBonus())
 
 def completeTurn():
     global game
     player = game.Blue if game.Blueturn else game.Red
-    player.attack(game.cities)
+    return player.attack(game.cities)
 
 def endturn():
     global game
     game.Blueturn = not game.Blueturn
-    checkForWinner()
+    return checkForWinner()
 
 def checkForWinner():
     winnerColor = game.cities[0].owner
@@ -50,11 +43,4 @@ def checkForWinner():
         if city.owner != winnerColor:
             flag = False
             break
-    if flag:
-        declareWinner(winnerColor)
-    else:
-        startTurn()
-
-def declareWinner(winner):
-    message = winner + " player won the game .. Wohooo!"
-    GameConsumer.sendWinnerMessage(message, winner)
+    return {"flag": flag, "winner": winnerColor}
