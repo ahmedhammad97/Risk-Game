@@ -14,7 +14,10 @@ class GameConsumer(WebsocketConsumer):
 
     def startTurn(self):
         toSendData = controller.startTurn()
-        self.send(toSendData)
+        if toSendData == "humanDeploy":
+            self.requestDeploy()
+        else:
+            self.send(toSendData)
 
     def disconnect(self, close_code):
         print("WebSocket connection is lost...")
@@ -35,12 +38,15 @@ class GameConsumer(WebsocketConsumer):
                 self.startTurn()
         elif data["type"] == "deployResponse":
             #Update Map
-            #Continue normal deployRender
-            pass
+            controller.updateMapByHuman(data)
+            #Continue normally
+            self.requestAttack()
+
         elif data["type"] == "attackResponse":
             #Update Map
+            controller.updateMapByHuman(data)
             #Continue normal attackRender
-            pass
+            controller.endturn()
 
     def requestDeploy(self):
         self.send(json.dumps({"type" : "deployInputRequest"}))

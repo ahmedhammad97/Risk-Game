@@ -1,5 +1,5 @@
 from .model import Game
-import json, time
+import json
 from .consumer import GameConsumer
 
 #Global Singlton Game Object
@@ -44,3 +44,8 @@ def checkForWinner():
             flag = False
             break
     return {"flag": flag, "winner": winnerColor}
+
+def updateMapByHuman(data):
+    global game
+    player = game.Blue if game.Blueturn else game.Red
+    player.update(data, game.cities)

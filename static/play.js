@@ -18,7 +18,7 @@ socket.onmessage = function(e) {
 };
 
 socket.onclose = function(e) {
-    alert("Something gone wrong, we apologize :(");
+    alert("Connection lost, we apologize :(");
 };
 
 socket.onerror = function(e) {
@@ -28,7 +28,7 @@ socket.onerror = function(e) {
 //Helper functions
 function displayMessage(message, color){
   $('#msg').text(message)
-  $('#msg').css("color", ()=>{return color=="Blue" ? "dodgerblue" : "red"})
+  if(color)  $('#msg').css("color", ()=>{return color=="Blue" ? "dodgerblue" : "red"})
 }
 
 function render(data){
