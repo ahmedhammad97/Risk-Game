@@ -28,19 +28,29 @@ class NPacifistAgent:
                     minCity = city
 
         if minCity:
-            #Find city with maximum armies
-            strongestNumber = 0
-            strongestCity = None
-            for city in minCity.neighbours:
+            #Find all matches
+            allMinCities = list()
+            allMinCities.append(minCity)
+            for city in map:
                 if city.owner == self.color:
-                    if city.armies > strongestNumber:
-                        strongestNumber = city.armies
-                        strongestCity = city
+                    if city.armies == minimum:
+                        allMinCities.append(city)
 
-            #Check if it can attack
-            if strongestNumber-1 > minimum:
-                strongestCity.armies = 1
-                minCity.armies = strongestNumber - minimum - 1
-                minCity.owner = self.color
+            for oneMinCity in allMinCities:
+                #Find cities with maximum armies
+                strongestNumber = 0
+                strongestCity = None
+                for city in minCity.neighbours:
+                    if city.owner == self.color:
+                        if city.armies > strongestNumber:
+                            strongestNumber = city.armies
+                            strongestCity = city
+
+                #Check if it can attack
+                if strongestNumber-1 > minimum:
+                    strongestCity.armies = 1
+                    minCity.armies = strongestNumber - minimum - 1
+                    minCity.owner = self.color
+                    break
 
         return AgentsHelper.sendTroops(self.color)

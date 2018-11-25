@@ -33,7 +33,7 @@ class AggresiveAgent:
                                 maxNeighbour = neighbour
 
                 if maxNeighbour:
-                    if not (maxNeighbour in attackedNeighbours):
+                    if maxNeighbour not in attackedNeighbours:
                         maxNeighbour.armies = city.armies - maximum - 1
                         city.armies = 1
                         maxNeighbour.owner = self.color
