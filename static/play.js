@@ -67,7 +67,6 @@ $('.army').on("click", (e)=>{ //On territories click
         if(+((attacker).innerHTML) > +((attacked).innerHTML) + 1){
           (attacked).innerHTML = (+((attacker).innerHTML)) - (+((attacked).innerHTML)) - 1;
           (attacker).innerHTML = 1;
-          (attacked).style.backgroundColor =  (attacker).style.backgroundColor
 
           //Data to send
           let id1 = (attacker).id;
@@ -77,15 +76,18 @@ $('.army').on("click", (e)=>{ //On territories click
           let color1 = (attacker).style.backgroundColor;
           let color2 = (attacked).style.backgroundColor;
 
+          console.log(color1, color2)
           //Only allows attacks to opponent territories
           if(color1 != color2){
-            color = color=="rgb(255, 0, 0)"? "Red" : "Blue"
-            sendHumanAttackData(id1, armies1, color, id2, armies2)
+            color1 = color1=="rgb(255, 0, 0)"? "Red" : "Blue";
+            (attacked).style.backgroundColor =  (attacker).style.backgroundColor;
+            sendHumanAttackData(id1, armies1, color1, id2, armies2)
           }
           else{
             sendError() //Pass turn
           }
         }else{
+          console.log("Few arrmies");
           sendError() //Pass turn
         }
       }
