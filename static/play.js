@@ -76,7 +76,6 @@ $('.army').on("click", (e)=>{ //On territories click
           let color1 = (attacker).style.backgroundColor;
           let color2 = (attacked).style.backgroundColor;
 
-          console.log(color1, color2)
           //Only allows attacks to opponent territories
           if(color1 != color2){
             color1 = color1=="rgb(255, 0, 0)"? "Red" : "Blue";
@@ -84,6 +83,7 @@ $('.army').on("click", (e)=>{ //On territories click
             sendHumanAttackData(id1, armies1, color1, id2, armies2)
           }
           else{
+            console.log("Similar color");
             sendError() //Pass turn
           }
         }else{
