@@ -11,7 +11,7 @@ class HumanAgent:
         pass
 
     def update(self, data, map):
-        updates = data.updates
+        updates = data["updates"]
         for record in updates:
             city = map[int(record["id"])]
             city.armies = int(record["armies"])

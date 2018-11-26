@@ -24,7 +24,7 @@ def renderMap(type, message):
 def startTurn():
     global game
     player = game.Blue if game.Blueturn else game.Red
-    return player.deploy(game.cities, game.calculateBonus())
+    return player.deploy(game.cities, getBonus())
 
 def completeTurn():
     global game
@@ -35,6 +35,12 @@ def endturn():
     global game
     game.Blueturn = not game.Blueturn
     return checkForWinner()
+
+def getBonus():
+    return game.calculateBonus()
+
+def getColor():
+    return "Blue" if game.Blueturn else "Red"
 
 def checkForWinner():
     winnerColor = game.cities[0].owner

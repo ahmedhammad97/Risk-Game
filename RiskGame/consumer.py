@@ -14,8 +14,8 @@ class GameConsumer(WebsocketConsumer):
 
     def startTurn(self):
         toSendData = controller.startTurn()
-        if toSendData == "humanDeploy":
-            self.requestDeploy()
+        if toSendData == "HumanDeploy":
+            self.requestDeploy(controller.getBonus(), controller.getColor())
         else:
             self.send(toSendData)
 
@@ -27,7 +27,13 @@ class GameConsumer(WebsocketConsumer):
         self.handleRecieved(text_data_json)
 
     def handleRecieved(self, data):
-        if data["type"] == "deploymentSuccess":
+        if data["type"] == "error":
+            endTurnData = controller.endturn()
+            if endTurnData["flag"]:
+                self.sendWinnerMessage(endTurnData["winner"])
+            else:
+                self.startTurn()
+        elif data["type"] == "deploymentSuccess":
             toSendData = controller.completeTurn()
             self.send(toSendData)
         elif data["type"] == "attackSuccess":
@@ -46,10 +52,17 @@ class GameConsumer(WebsocketConsumer):
             #Update Map
             controller.updateMapByHuman(data)
             #Continue normal attackRender
-            controller.endturn()
+            endTurnData = controller.endturn()
+            if endTurnData["flag"]:
+                self.sendWinnerMessage(endTurnData["winner"])
+            else:
+                self.startTurn()
 
-    def requestDeploy(self):
-        self.send(json.dumps({"type" : "deployInputRequest"}))
+    def requestDeploy(self, armies, color):
+        toSend = {"type" : "deployInputRequest"}
+        toSend["armies"] = armies
+        toSend["color"] = color
+        self.send(json.dumps(toSend))
 
     def requestAttack(self):
         self.send(json.dumps({"type" : "attackInputRequest"}))
