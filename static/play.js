@@ -1,5 +1,5 @@
-var socket = new WebSocket('ws://' + window.location.host +
-                                     window.location.pathname);
+//WebSocket Connection
+var socket = new WebSocket('ws://' + window.location.host + window.location.pathname);
 
 socket.onopen = function(e){
     console.log("Connection started .. Hell yeah!");
@@ -7,14 +7,14 @@ socket.onopen = function(e){
 
 socket.onmessage = function(e) {
     var data = JSON.parse(e.data);
-    setTimeout(()=>{
+    setTimeout(()=>{ //Delay effect
       if(data.type=="render") render(data);
       if(data.type=="deployInputRequest") getDeployInput(data);
       if(data.type=="attackInputRequest") getAttackInput(data);
       if(data.type=="renderDeployments") renderDeployments(data);
       if(data.type=="renderAttack") renderAttack(data);
       if(data.type=="winning") displayMessage(data.message, data.winner)
-    },1500)
+    },1200)
 };
 
 socket.onclose = function(e) {
@@ -37,7 +37,7 @@ function displayMessage(message, color){
   if(color)  $('#msg').css("color", ()=>{return color=="Blue" ? "rgb(30, 144, 255)" : "rgb(255, 0, 0)"})
 }
 
-$('.army').on("click", (e)=>{
+$('.army').on("click", (e)=>{ //On territories click
   if(allowInput){
     if(mode){
       let id = e.target.id;
@@ -45,12 +45,14 @@ $('.army').on("click", (e)=>{
       e.target.innerHTML = +(e.target.innerHTML) + armies;
       armies = e.target.innerHTML;
       let color = e.target.style.backgroundColor;
+
+      //Only allows deployments to allied territories
       if(color == $("#msg").css("color")){
         color = color=="rgb(255, 0, 0)"? "Red" : "Blue"
         sendHumanDeployData(id, armies, color);
       }
       else{
-        sendError()
+        sendError() //Pass turn
       }
     }
     else{
@@ -75,22 +77,23 @@ $('.army').on("click", (e)=>{
           let color1 = (attacker).style.backgroundColor;
           let color2 = (attacked).style.backgroundColor;
 
+          //Only allows attacks to opponent territories
           if(color1 != color2){
             color = color=="rgb(255, 0, 0)"? "Red" : "Blue"
             sendHumanAttackData(id1, armies1, color, id2, armies2)
           }
           else{
-            sendError()
+            sendError() //Pass turn
           }
         }else{
-          sendError()
+          sendError() //Pass turn
         }
       }
     }
   }
 })
 
-function render(data){
+function render(data){ //Display colors and values of territories
   nodes = data.nodes;
   for(let i=0; i<nodes.length; i++){
     $("#"+i).css("background-color", ()=>{
@@ -98,6 +101,8 @@ function render(data){
     })
     let originalArmies = $("#"+i).text()
     $("#"+i).text(nodes[i]["armies"])
+
+    //Highlight territories on change
     if(originalArmies != $("#"+i).text()){
       let originalColor = $("#"+i).css("background-color")
       $("#"+i).css("background-color", "yellow")
@@ -106,6 +111,7 @@ function render(data){
   }
 }
 
+//Communication functions
 function renderDeployments(data){
   displayMessage(data.message, data.color);
   render(data);

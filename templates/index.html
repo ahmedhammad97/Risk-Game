@@ -1,10 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Risk Game</title>
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Kaushan+Script|Orbitron" rel="stylesheet">
-    {% load static %}
     <link rel="stylesheet" href="{% static "index.css" %}">
   </head>
   <body>
@@ -13,7 +13,6 @@
       <h1>Risk Game</h1>
 
       <div id="maps">
-        {% load static %}
         <img src="{% static "images/egypt.jpg" %}" alt="Egypt map" class="selected">
         <img src="{% static "images/us.jpg" %}" alt="US map" class="">
       </div>
