@@ -40,8 +40,9 @@ def giveBirth(map, color, armies):
                     if neighbour.owner != color: #We can attack
                         if neighbour.armies < city.armies -1:
                             offspring = deepcopy(state)
-                            offspring[i][k].armies = offspring[i].armies - 1
+                            offspring[i].neighbours[k].armies = offspring[i].armies - 1
                             offspring[i].armies = 1
+                            offspring[i].neighbours[k].owner = color
                             attackinfOffspring.append({
                                 "parent" : state,
                                 "state" : offspring
