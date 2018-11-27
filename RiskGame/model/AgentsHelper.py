@@ -37,7 +37,7 @@ def giveBirth(map, color, armies):
         for i,city in enumerate(state):
             if city.owner == color: #We can attack by
                 for k,neighbour in enumerate(city.neighbours):
-                    if neighbour.owner != color:
+                    if neighbour.owner != color: #We can attack
                         if neighbour.armies < city.armies -1:
                             offspring = deepcopy(state)
                             offspring[i][k].armies = offspring[i].armies - 1
