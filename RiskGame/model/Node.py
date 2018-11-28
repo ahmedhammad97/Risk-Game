@@ -5,3 +5,6 @@ class Node:
         self.owner = owner
         self.armies = armies
         self.neighbours = []
+
+    def __lt__(self, other): #Comparison fn used by PriorityQueue
+        return 1

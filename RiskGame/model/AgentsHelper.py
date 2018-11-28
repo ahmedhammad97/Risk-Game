@@ -18,6 +18,13 @@ def calculateHeuristic(map, color):
             counter+=city.armies
     return counter
 
+def calculateBonus(map, color):
+    counter = 0
+    for city in map:
+        if city.owner == color:
+            counter+=1
+    return max(3, int(counter/3))
+
 def isGoalState(map, color):
     for city in map:
         if city.owner != color:
@@ -32,7 +39,7 @@ def giveBirth(map, color, armies):
             offspring[i].armies += armies
             deploymentOffspring.append(offspring)
 
-    attackinfOffspring = list()
+    attackingOffspring = list()
     for state in deploymentOffspring:
         for i,city in enumerate(state):
             if city.owner == color: #We can attack by
@@ -43,9 +50,9 @@ def giveBirth(map, color, armies):
                             offspring[i].neighbours[k].armies = offspring[i].armies - 1
                             offspring[i].armies = 1
                             offspring[i].neighbours[k].owner = color
-                            attackinfOffspring.append({
+                            attackingOffspring.append({
                                 "parent" : state,
                                 "state" : offspring
                             })
 
-    return attackinfOffspring
+    return attackingOffspring
