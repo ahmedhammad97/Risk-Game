@@ -8,22 +8,16 @@ class RAStarAgent:
     def deploy(self, map, armies):
         children = AgentsHelper.giveBirth(map, self.color, armies)
         minHeuristic = 999999
-        self.cost += 1
+        self.cost += 1 #Cost represents number of turns
         for child in children:
             childHeuristic = AgentsHelper.calculateHeuristic(child["state"], self.color)
             if childHeuristic + self.cost < minHeuristic:
                 minHeuristic = childHeuristic + self.cost
                 self.newMap = child
 
-        for i,city in enumerate(map):
-            city.armies = self.newMap["parent"][i].armies
-            city.owner = self.newMap["parent"][i].owner
-
+        AgentsHelper.updateMap(map, self.newMap["parent"])
         return AgentsHelper.sendDeployments(self.color, armies)
 
     def attack(self, map):
-        for i,city in enumerate(map):
-            city.armies = self.newMap["state"][i].armies
-            city.owner = self.newMap["state"][i].owner
-
+        AgentsHelper.updateMap(map, self.newMap["state"])
         return AgentsHelper.sendTroops(self.color)

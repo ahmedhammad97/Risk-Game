@@ -11,7 +11,7 @@ class AStarAgent:
         visited = set()
         cost = 0
 
-        children = AgentsHelper.giveBirth(map, self.color, armies)
+        children = AgentsHelper.giveBirth(map, self.color, armies) #Generate next level of states
         for child in children:
             heuristic = AgentsHelper.calculateHeuristic(child["state"], self.color)
             PQueue.put((heuristic, child["state"], child))
@@ -20,11 +20,10 @@ class AStarAgent:
             queueItem = PQueue.get()
             state = queueItem[1]
 
+            #Force termination if stuck in infinite loop
             if cost >= 99:
                 self.newMap = queueItem[2]
-                for i,city in enumerate(map):
-                    city.armies = self.newMap["parent"][i].armies
-                    city.owner = self.newMap["parent"][i].owner
+                AgentsHelper.updateMap(map , self.newMap["parent"])
                 return AgentsHelper.sendDeployments(self.color, armies)
 
             tupleState = tuple(state)
@@ -34,9 +33,7 @@ class AStarAgent:
 
             if AgentsHelper.isGoalState(state, self.color):
                 self.newMap = queueItem[2]
-                for i,city in enumerate(map):
-                    city.armies = self.newMap["parent"][i].armies
-                    city.owner = self.newMap["parent"][i].owner
+                AgentsHelper.updateMap(map, self.newMap["parent"])
                 return AgentsHelper.sendDeployments(self.color, armies)
 
             newArmies = AgentsHelper.calculateBonus(state, self.color)
@@ -48,8 +45,5 @@ class AStarAgent:
 
 
     def attack(self, map):
-        for i,city in enumerate(map):
-            city.armies = self.newMap["state"][i].armies
-            city.owner = self.newMap["state"][i].owner
-
+        AgentsHelper.updateMap(map, self.newMap["state"])
         return AgentsHelper.sendTroops(self.color)

@@ -8,20 +8,15 @@ class GreedyAgent:
         children = AgentsHelper.giveBirth(map, self.color, armies)
         minHeuristic = 999999
         for child in children:
+            #Find state with best heuristic
             childHeuristic = AgentsHelper.calculateHeuristic(child["state"], self.color)
             if childHeuristic < minHeuristic:
                 minHeuristic = childHeuristic
                 self.newMap = child
 
-        for i,city in enumerate(map):
-            city.armies = self.newMap["parent"][i].armies
-            city.owner = self.newMap["parent"][i].owner
-
+        AgentsHelper.updateMap(map, self.newMap["parent"])
         return AgentsHelper.sendDeployments(self.color, armies)
 
     def attack(self, map):
-        for i,city in enumerate(map):
-            city.armies = self.newMap["state"][i].armies
-            city.owner = self.newMap["state"][i].owner
-
+        AgentsHelper.updateMap(map, self.newMap["state"])
         return AgentsHelper.sendTroops(self.color)

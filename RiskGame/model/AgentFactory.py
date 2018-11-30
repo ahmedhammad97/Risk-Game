@@ -4,6 +4,7 @@ from .agents import RAStarAgent, MinmaxAgent
 
 def build(agentName, playerColor):
     try:
+        #Python way of doing switch-case
         return {
             "human": HumanAgent.HumanAgent(playerColor),
             "cPassive": CPassiveAgent.CPassiveAgent(playerColor),

@@ -6,11 +6,11 @@ from .consumer import GameConsumer
 game = None
 
 
-def prepare(data):
+def prepare(data): #Creates game instance
     global game
     game = Game.Game(data["map"], data["playerOne"], data["playerTwo"])
 
-def renderMap(type, message):
+def renderMap(type, message): #Returns Json object to be rendered by client
     global game
     items = game.getMap()
     result =  {"type": type, "nodes": []}
@@ -46,12 +46,12 @@ def checkForWinner():
     winnerColor = game.cities[0].owner
     flag = True
     for city in game.cities:
-        if city.owner != winnerColor:
+        if city.owner != winnerColor: #Still have territories to attack
             flag = False
             break
     return {"flag": flag, "winner": winnerColor}
 
-def updateMapByHuman(data):
+def updateMapByHuman(data): #Apply human agent moves to the model
     global game
     player = game.Blue if game.Blueturn else game.Red
     player.update(data, game.cities)

@@ -1,3 +1,5 @@
+#FOR DEVELOPING PURPOSES
+#PREVENT BROWSER FROM CACHING FILES
 from django.views.decorators.cache import never_cache
 
 class NoCachingMiddleware(object):

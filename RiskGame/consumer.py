@@ -6,8 +6,8 @@ class GameConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
         print("Wohooo .. Connected to client!")
-        self.render()
-        self.startTurn()
+        self.render() #Send initial random map
+        self.startTurn() #First turn call
 
     def render(self, type="render", message=None):
         self.send(controller.renderMap(type, message))
@@ -23,7 +23,7 @@ class GameConsumer(WebsocketConsumer):
         print("WebSocket connection is lost...")
 
     def receive(self, text_data):
-        text_data_json = json.loads(text_data)
+        text_data_json = json.loads(text_data) #Parse Json object to Python-like object
         self.handleRecieved(text_data_json)
 
     def handleRecieved(self, data):
@@ -33,22 +33,22 @@ class GameConsumer(WebsocketConsumer):
                 self.sendWinnerMessage(endTurnData["winner"])
             else:
                 self.startTurn()
-        elif data["type"] == "deploymentSuccess":
+        elif data["type"] == "deploymentSuccess": #Human agent deployment request
             toSendData = controller.completeTurn()
             self.send(toSendData)
-        elif data["type"] == "attackSuccess":
+        elif data["type"] == "attackSuccess": #Human agent attack request
             endTurnData = controller.endturn()
             if endTurnData["flag"]:
                 self.sendWinnerMessage(endTurnData["winner"])
             else:
                 self.startTurn()
-        elif data["type"] == "deployResponse":
+        elif data["type"] == "deployResponse": #Human agent deployment response
             #Update Map
             controller.updateMapByHuman(data)
             #Continue normally
             self.requestAttack()
 
-        elif data["type"] == "attackResponse":
+        elif data["type"] == "attackResponse": #Human agent attack request
             #Update Map
             controller.updateMapByHuman(data)
             #Continue normal attackRender
