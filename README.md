@@ -33,4 +33,4 @@ The controller checks for the winning state after every turn, and terminates the
 ## Screenshots
 ![ScreenShot1](https://github.com/ahmedhammad97/Risk-Game/blob/master/screenshots/home.png)
 ![ScreenShot2](https://github.com/ahmedhammad97/Risk-Game/blob/master/screenshots/playingUsa.gif)
-![ScreenShot3](https://github.com/ahmedhammad97/Risk-Game/blob/master/screenshots/winningEgypt.gif)
+![ScreenShot3](https://github.com/ahmedhammad97/Risk-Game/blob/master/screenshots/WinningEgypt.gif)
